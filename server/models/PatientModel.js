@@ -65,6 +65,13 @@ const PatientSchema = new Schema({
         type:Date,
         required:false,
         default:Date.now
+    },
+    passwd:{
+        type:String
+    },
+    usertype:{
+        type:String, // guest,patient
+        required:true
     }
 });
 const PatientModel = mongoose.model('Patient',PatientSchema);

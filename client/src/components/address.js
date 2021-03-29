@@ -19,7 +19,7 @@ let handleSendMessage = e =>{
 
 return (
 <div className="">
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3064.6224923114246!2d72.86786561421611!3d19.29070885020284!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b046c96ee519%3A0xbcfb9ccc3b1d4d13!2sAntariksh%20CHS%20Bldg.!5e1!3m2!1sen!2sin!4v1616840392496!5m2!1sen!2sin" title="Map" width="100%" height="450" style={{border:"0"}} loading="lazy"></iframe>
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3765.8082350313703!2d72.86786561490447!3d19.290703786965082!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b046c96ee519%3A0xbcfb9ccc3b1d4d13!2sAntariksh%20CHS%20Bldg.!5e0!3m2!1sen!2sin!4v1616995462423!5m2!1sen!2sin" title="Map" width="100%" height="450" style={{border:"0"}} loading="lazy"></iframe>
 
 <div className="container contact-form">
             <div className="contact-image">

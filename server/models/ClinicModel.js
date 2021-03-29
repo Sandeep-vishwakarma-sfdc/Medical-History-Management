@@ -26,7 +26,12 @@ const ClinicSchema = Schema({
         type:String,
         required:true,
         unique:true
+    },
+    passwd:{
+        type:String,
+        required:true
     }
+
 });
 
 const ClinicModel = mongoose.model('Client',ClinicSchema);
