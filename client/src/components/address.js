@@ -25,7 +25,7 @@ return (
             <div className="contact-image">
                 <img src="https://image.ibb.co/kUagtU/rocket_contact.png" alt="rocket_contact"/>
             </div>
-            <form>
+            <form id="contact">
                 <h3>Drop Us a Message</h3>
                <div className="row">
                     <div className="col-md-6">

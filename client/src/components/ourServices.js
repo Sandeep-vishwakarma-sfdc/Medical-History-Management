@@ -1,25 +1,26 @@
 import { Container,Col,Image,Row } from "react-bootstrap";
 function OurServices(){
 return(
-    <div className="Container mt-4">
+    <div className="Container mt-4" id="services">
      <h3 className="row justify-content-center subheader p-2">Services &#38; Technology</h3>
     <div className="mt-5">
     <Container>
     <Row>
     <Col xs={6} md={3}>
-        <Image src="http://wallpaperheart.com/wp-content/uploads/2018/08/4k-ultra-hd-wallpaper-6.jpg" roundedCircle height="200px" width="200px"/>
+        <Image src="https://thumbs.dreamstime.com/z/can-help-concept-made-human-hand-holding-marker-transparent-wipe-board-51624014.jpg" roundedCircle height="300px" width="300px"/>
     </Col>
     <Col>
-    <p className="mt-3 para"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
     </Col>
     </Row>
     </Container>
     </div>
     <div className="container mt-4">
         <h1>How can we help you</h1>
-        <p className="para">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-        </p>
+        <p className="para">This web app will manage the user’s medical history.The user can maintain his medical history by entering the details and uploading the prescription or file.And this web app will use the user’s aadhar card number and his number to get the Otp for security and can get his entire medical history.
+ 
+ These medical details can also be viewed by the current doctor to get the details about the patient and the diseases he had and the medicines he took and or the process of the treatment by entering the aadhar card number of the employee and getting the Otp from the user.
+ 
+  </p>
     </div>
     </div>
 );

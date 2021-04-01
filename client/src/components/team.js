@@ -6,20 +6,22 @@ return (
     <div className="row">
         <div className="col-xs-6 col-sm-6 col-md-4">
             <img
-                width={350}
-                height={650}
+                width={360}
+                height={550}
                 className="mr-3"
                 style={{borderRadius:"5px"}}
-                src="http://wallpaperheart.com/wp-content/uploads/2018/08/4k-ultra-hd-wallpaper-6.jpg"
+                src="https://media.istockphoto.com/illustrations/doctor-clip-art-design-illustration-id657286402"
                 alt="Generic placeholder"
             />
         </div>
         <div className="col-xs-6 col-sm-6 col-md-8">
        
         <h1>Why do we use it?</h1>
-        <p className="para">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+        <p className="para">we visit the doctor, they start asking us questions on the basis of the condition of the patient he/she can also ask about the clinical history of the patient. Like patients have some sort of allergy but he / she forgot to mention the medications they were taking 2 years ago. Electronic medical record design for this purpose so the data can be easily accessed by  the doctor and even if a patient misses the details we can have a backup to know all the information the doctor needs to treat the patient. It will really helpful to patients as well as doctors.
+.</p>
         <p className="para">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+            Using Digital method we can store and able to access the data which stored in past as well as we are going to store in future.
+            Clinical  Information is important for doctors to treat effectivly patients.
         </p>
         </div>
     </div>
@@ -30,17 +32,21 @@ return (
     <Container>
             <Row>
             <Col xs={6} md={4}>
-                <Image src="http://wallpaperheart.com/wp-content/uploads/2018/08/4k-ultra-hd-wallpaper-6.jpg" roundedCircle height="150px" width="150px"/>
+                <Image src="https://cdn1.iconfinder.com/data/icons/donate-glyph-silhouettes/300/191224534Untitled-3-512.png" roundedCircle height="150px" width="150px"/>
             </Col>
             <Col>
-            <h1>Professional Team</h1>
-            <p className="para mt-2"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+            <h1>Our Team</h1>
+            <p className="para mt-2"> 
+             ❑ Unnati Jain<br/>
+             ❑ Sandeep Vishwakarma<br/>
+             ❑ Akshay Pati
+            </p>
             </Col>
             </Row>
         </Container>
     </div>
     </div>
     </div>
-)    
+);    
 }
 export default Team;

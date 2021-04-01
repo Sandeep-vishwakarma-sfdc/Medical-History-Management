@@ -13,10 +13,10 @@ for(let i=0;i<4;i++)
 {
     OTP+=num[Math.floor(Math.random()*10)];
 }
-
 const phone=req.body.phone;
+console.log('Phone'+phone);
 var options = {authorization : process.env.API_KEY , message : OTP ,  numbers :[phone]} ;
 const response= fast2sms.sendMessage(options);
-res.send('OTP sent');
-
+console.log('res'+response);
+res.send(OTP);
 };

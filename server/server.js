@@ -4,9 +4,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const PORT = 9000;
 const otpRoutes=require('../server/routes/otp');
-//app.use("/",otpRoutes);
-app.use('/',otpRoutes);
+const cors = require('cors');
 app.use(express.json());
+app.use(cors());
+app.use('/',otpRoutes);
 app.listen(PORT,()=>console.log(`server is running at ${PORT}`));
 
 

@@ -2,6 +2,7 @@ import { Button,Modal} from 'react-bootstrap';
 import React, { useEffect, useState } from "react"; 
 import {Link} from 'react-router-dom';
 import OtpInput from 'react-otp-input';
+import axios from 'axios';
 function Register(){
     const [showModel,setshowModel ]=useState(true);
     const [isAdhaar, setIsAdhaar] = useState(false);
@@ -10,6 +11,7 @@ function Register(){
     const [otp,setOtp] = useState(0);
     const [otpFlag,setOtpFlag] = useState(true);
     const [isGuest,setIsguest] = useState(false);
+    const [inputOtp,setInputOtp] = useState(0);
     
     useEffect(()=>{
         console.log('sometihing happen');
@@ -25,9 +27,13 @@ function Register(){
     }
 
     let handleChangeradio = e =>{
-        let isPatient = e.target.value =='Clinic'?false:true;
+        let isPatient = e.target.value ==='Clinic'?false:true;
         console.log('isPatient ',isPatient);
         setRadioSelected(e.target.value);
+
+        isPatient===true?setIsAdhaar(true):setIsAdhaar(false);
+        setUserDetails({'fname':'','lname':'','email':'','mobile':'','adhaarNumber':'','age':'','password':'','retype_pass':'','isPatient':isPatient});
+
         isPatient==true?setIsAdhaar(true):setIsAdhaar(false);
         setUserDetails({'fname':'','lname':'','email':'','mobile':'','adhaarNumber':'','age':'','password':'','retype_pass':'','isPatient':isPatient,'clinicname':''});
         if(e.target.value=='Guest'){
@@ -40,7 +46,23 @@ function Register(){
     let handleChangeOtp = otp =>{
         console.log('OTP ',otp);
         setOtp(otp);
+    }
 
+    let handleRegister = evt => {
+        console.log('User Detail -->',userDetails);
+        setOtpFlag(false);
+        let obj = {phone:userDetails.mobile};
+        axios.post(`http://localhost:9000/otpverify`,obj).then(res=>{
+            console.log('Res -->',res);
+            setInputOtp(res.data);
+        }).catch(err=>console.log(err));
+    }
+    let handleOtpSubmit = e =>{
+        if(otp==inputOtp){
+            console.log("Register success");
+        }else{
+            console.log("Invalid OTP");
+        }
     }
 
         return otpFlag?(
@@ -151,10 +173,7 @@ function Register(){
                 <Link to="/login" className="register_link forgot-password text-right"> click here to login</Link>
                 <Link to="/" className="btn btn-secondary" onClick={() => setshowModel(false)
                     }>Close</Link>
-                <Button variant="primary" onClick={()=>{
-                    console.log('userDetails ',userDetails);
-                    setOtpFlag(false);
-                }}>Sign up</Button>
+                <Button variant="primary" onClick={handleRegister}>Sign up</Button>
             </Modal.Footer>
         </Modal>
         ):(<Modal show={showModel} onHide={()=>{
@@ -178,10 +197,7 @@ function Register(){
                 <Link to="/login" className="register_link forgot-password text-right"> click here to login</Link>
                 <Link to="/" className="btn btn-secondary" onClick={() => setshowModel(false)
                     }>Close</Link>
-                <Button variant="primary" onClick={()=>{
-                    console.log('userDetails ',userDetails);
-                    
-                }}>Sign up</Button>
+                <Button variant="primary" onClick={handleOtpSubmit}>Sign up</Button>
             </Modal.Footer>
         </Modal>);
 }
