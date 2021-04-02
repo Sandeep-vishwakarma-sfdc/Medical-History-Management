@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import { Button,Modal} from 'react-bootstrap';
 import React, { useEffect, useState } from "react"; 
 import {Link} from 'react-router-dom';
@@ -189,6 +190,7 @@ function Register(){
                  className="otpcls"
                  value={otp}
                  onChange={handleChangeOtp}
+                 
                  numInputs={4}
                  separator={<span>O</span>}
              />

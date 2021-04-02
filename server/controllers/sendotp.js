@@ -5,7 +5,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 require('dotenv').config();
 
-
 exports.otpverify= (req,res)=>{
 let num="1234567890";
 let OTP="";
@@ -16,7 +15,8 @@ for(let i=0;i<4;i++)
 const phone=req.body.phone;
 console.log('Phone'+phone);
 var options = {authorization : process.env.API_KEY , message : OTP ,  numbers :[phone]} ;
-const response= fast2sms.sendMessage(options);
-console.log('res'+response);
+/*const response= fast2sms.sendMessage(options);*/
+res.setHeader("Content-Type","application/json");
 res.send(OTP);
+console.log(options);
 };
