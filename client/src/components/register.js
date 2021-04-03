@@ -66,8 +66,11 @@ function Register(){
     let handleOtpSubmit = e =>{
         if(otp==inputOtp){
             console.log("Register success",userDetails);
-            let obj = {name:userDetails.clinicname,emailxyz:userDetails.email,phone:userDetails.mobile,passwd:userDetails.password};
-            axios.post('http://localhost:5000/registerclinic',obj).then(res =>{
+      let url="";
+            if(userDetails.usertype=='Guest'){
+                url='http://localhost:9000/registerGuest';
+            }
+            axios.post(url,userDetails).then(res =>{
                 console.log('Response from testConnection',res);
             }).catch(err=>console.log(err));
         }else{

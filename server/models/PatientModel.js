@@ -31,7 +31,7 @@ const PatientSchema = new Schema({
     },
     name:{
         type:String,
-        required:true
+        required:false
     },
     motherName:{
         type:String,
@@ -55,7 +55,7 @@ const PatientSchema = new Schema({
     },
     gender:{
         type:String,
-        required:true,
+        required:false,
     },
     BMI:{
         type:String,
@@ -75,7 +75,7 @@ const PatientSchema = new Schema({
     },
     alise:{
         type:String,
-        unique:true
+        unique:false
     }
 });
 const PatientModel = mongoose.model('Patient',PatientSchema);
