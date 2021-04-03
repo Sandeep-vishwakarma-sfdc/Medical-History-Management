@@ -12,6 +12,10 @@ let handleView = () =>{
     console.log('Record Id ',id)
     history.push(`/persondetail/${id}`);
 }   
+let handlePrompt = () =>{
+    console.log('Delete prompt');
+    history.push(`/promptdelete`);
+}
 
 return(
 <div className="row mt-2" style={{backgroundColor:"white",borderBottom:'2px solid grey'}}>
@@ -27,10 +31,10 @@ return(
         <span  className="iconcmp" onClick={handleView}>
         <GrView size="1.5em" /><span style={{paddingLeft:'5px'}}>View</span>
         </span>
-        <span className="iconcmp ml-4" onClick={(e)=>console.log("Edit",id)}>
+        <span className="iconcmp ml-4" onClick={handleView}>
         <FaEdit size="1.5em"  color="#007BFF" /><span style={{paddingLeft:'5px'}}>Edit</span>
         </span>
-        <span className="iconcmp ml-4" onClick={(e)=>console.log("Delete",id)}>
+        <span className="iconcmp ml-4" onClick={handlePrompt}>
         <MdDelete size="1.5em"  color="rgb(241, 72, 50)" /><span style={{paddingLeft:'5px'}}>Delete</span>
         </span>
     </div>

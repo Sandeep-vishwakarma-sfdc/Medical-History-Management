@@ -147,3 +147,7 @@ body, html, .App, #root, .outer {
   box-sizing: border-box;
   border-radius: 50px!important;
 }
+
+.required-input{
+  color: red;
+}

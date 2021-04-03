@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import ListUserCard from "./listUserCard";
-import {BiArrowBack} from 'react-icons/bi'
-import {MdArrowForward} from 'react-icons/md'
+import {useHistory} from 'react-router-dom';
+
 function ClinicDashboard(){
+let history = useHistory();
 const [usertype,setUsertype] = useState('patient');
 const [searchstr,setSearchstr] = useState('');
 const [patientlst,setPatientlst] = useState([{_id:'1dasdsdfdfgdg',Name:'Sandeep Vishwakarma'},{_id:'2',Name:'Sachin Vishwakarma'},{_id:'3',Name:'Amit Vishwakarma'},{_id:'4',Name:'Sandeep Vishwakarma'},{_id:'5',Name:'Sachin Vishwakarma'},{_id:'6',Name:'Amit Vishwakarma'},{_id:'7',Name:'Mummy Vishwakarma'},{_id:'8',Name:'Akshay Patil'}]);
@@ -43,24 +44,21 @@ function searchInList(){
     console.log('templist ',templist1);
 }
 
-// let handleFirst = e =>{
 
-// }
-// let handlePrevious = e =>{
-
-// }
-
-// let handleNext = e =>{
-
-// }
-// let handleLast = e =>{
-
-// }
+let handleAddPatient = e => {
+    console.log('Add patient');
+    history.push('/addpatient');
+}
 
 return (<div className="ml-3 ">
         <div className="form-group mt-3 row">
             <div className="col-xs-6 col-sm-3 col-md-3">
             <input type="text" className="form-control" placeholder="type here to search.." name="search" autoComplete="off" value={searchstr} onKeyUp={handleSearch} onChange={handleSearch}/>
+            </div>
+            <div className="col-xs-6 col-sm-3 col-md-3"></div>
+            <div className="col-xs-6 col-sm-5 col-md-4"></div>
+            <div className="col-xs-6 col-sm-1 col-md-2">
+                <Button variant="primary" onClick={handleAddPatient}>Add Person</Button>
             </div>
         </div>
             <div className="listUser">

@@ -9,7 +9,11 @@ function Login() {
     const [showModel, setshowModel] = useState(true);
     const [isAdhaar, setIsAdhaar] = useState(true);
     const [radioSelected, setRadioSelected] = useState('Patient');
+
     const [userDetails,setUserDetails] = useState({'isPatient':true,'adhaarNumber':'','email':'','password':'','usertype':'Patient','alise':''});
+
+    const [userDetails,setUserDetails] = useState({'isPatient':true,'adhaarNumber':'','email':'','password':'','usertype':'Patient'});
+
     const [isGuest,setIsguest] = useState(false);
     const [isotp,setIsOtp] = useState(false);
     const [otp,setOtp] = useState(0);
@@ -64,12 +68,17 @@ function Login() {
                 <Modal.Body>
                     <form hidden={isGuest}>
                         <div className="form-group" hidden={isAdhaar}>
-                            <label>Email</label>
+                            <label>Email</label><span className="required-input">*</span>
                             <input type="email" className="form-control" placeholder="Enter email" name="email" value={userDetails.email} onChange={handleChange}/>
                         </div>
                         <div className="form-group" hidden={!isAdhaar}>
+
                             <label>Username</label>
                             <input type="text" className="form-control" placeholder="Enter username" name="alise" value={userDetails.alise} onChange={handleChange}/>
+
+                            <label>Email</label>
+                            <input type="text" className="form-control" placeholder="Enter email" name="email" value={userDetails.email} onChange={handleChange}/>
+
                         </div>
                         <div className="form-group">
                             <label>Password</label>
