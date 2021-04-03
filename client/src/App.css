@@ -141,3 +141,9 @@ body, html, .App, #root, .outer {
   float: right;
   margin-top: 5px;
 }
+
+.dashboard-card{
+  border: 2px solid gray!important;
+  box-sizing: border-box;
+  border-radius: 50px!important;
+}

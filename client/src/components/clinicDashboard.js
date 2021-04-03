@@ -6,10 +6,11 @@ import {MdArrowForward} from 'react-icons/md'
 function ClinicDashboard(){
 const [usertype,setUsertype] = useState('patient');
 const [searchstr,setSearchstr] = useState('');
-const [patientlst,setPatientlst] = useState([{_id:'1',Name:'Sandeep Vishwakarma'},{_id:'2',Name:'Sachin Vishwakarma'},{_id:'3',Name:'Amit Vishwakarma'},{_id:'4',Name:'Sandeep Vishwakarma'},{_id:'5',Name:'Sachin Vishwakarma'},{_id:'6',Name:'Amit Vishwakarma'},{_id:'7',Name:'Mummy Vishwakarma'}]);
+const [patientlst,setPatientlst] = useState([{_id:'1dasdsdfdfgdg',Name:'Sandeep Vishwakarma'},{_id:'2',Name:'Sachin Vishwakarma'},{_id:'3',Name:'Amit Vishwakarma'},{_id:'4',Name:'Sandeep Vishwakarma'},{_id:'5',Name:'Sachin Vishwakarma'},{_id:'6',Name:'Amit Vishwakarma'},{_id:'7',Name:'Mummy Vishwakarma'},{_id:'8',Name:'Akshay Patil'}]);
 const [templist,setTempList] = useState([]);
 
 useEffect(()=>{
+    // call Api 
     setTempList(patientlst);
 },[])
 
@@ -19,7 +20,7 @@ let handleSearch = event => {
         searchInList();
     }else{
         console.log('Refresh from Api');
-        let temp = [{_id:'1',Name:'Sandeep Vishwakarma'},{_id:'2',Name:'Sachin Vishwakarma'},{_id:'3',Name:'Amit Vishwakarma'},{_id:'4',Name:'Sandeep Vishwakarma'},{_id:'5',Name:'Sachin Vishwakarma'},{_id:'6',Name:'Amit Vishwakarma'},{_id:'7',Name:'Mummy Vishwakarma'}];
+        let temp = [{_id:'1',Name:'Sandeep Vishwakarma'},{_id:'2',Name:'Sachin Vishwakarma'},{_id:'3',Name:'Amit Vishwakarma'},{_id:'4',Name:'Sandeep Vishwakarma'},{_id:'5',Name:'Sachin Vishwakarma'},{_id:'6',Name:'Amit Vishwakarma'},{_id:'7',Name:'Mummy Vishwakarma'},{_id:'8',Name:'Akshay Patil'}];
         setPatientlst(temp);
         setTempList(temp);
     }

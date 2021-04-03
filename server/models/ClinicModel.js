@@ -8,7 +8,7 @@ const ClinicSchema = Schema({
     },
     Address:{
         type:String,
-        required:true
+        required:false
     },
     tel:{
         type:String,
@@ -24,8 +24,8 @@ const ClinicSchema = Schema({
     },
     clinicCode:{
         type:String,
-        required:true,
-        unique:true
+        required:false,
+        unique:false
     },
     passwd:{
         type:String,

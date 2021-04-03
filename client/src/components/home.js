@@ -26,8 +26,7 @@ return(
     <Team></Team>
     <OurServices></OurServices>
     <Address></Address>
-    <div  className="row justify-content-center">  <ClinicD></ClinicD></div>
-    <div  className="row-right">  <PatientD></PatientD></div>
+   
     </div>
 );
 }

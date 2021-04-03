@@ -72,6 +72,10 @@ const PatientSchema = new Schema({
     usertype:{
         type:String, // guest,patient
         required:true
+    },
+    alise:{
+        type:String,
+        unique:true
     }
 });
 const PatientModel = mongoose.model('Patient',PatientSchema);

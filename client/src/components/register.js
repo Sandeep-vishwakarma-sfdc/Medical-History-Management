@@ -4,11 +4,13 @@ import React, { useEffect, useState } from "react";
 import {Link} from 'react-router-dom';
 import OtpInput from 'react-otp-input';
 import axios from 'axios';
+import {useHistory} from 'react-router-dom';
 function Register(){
+    let history = useHistory();
     const [showModel,setshowModel ]=useState(true);
     const [isAdhaar, setIsAdhaar] = useState(false);
     const [radioSelected, setRadioSelected] = useState('Clinic');
-    const [userDetails,setUserDetails] = useState({'fname':'','lname':'','email':'','mobile':'','adhaarNumber':'','age':'','password':'','retype_pass':'','isPatient':true,'clinicname':''});
+    const [userDetails,setUserDetails] = useState({'fname':'','lname':'','email':'','mobile':'','adhaarNumber':'','age':'','password':'','retype_pass':'','isPatient':true,'clinicname':'','usertype':'Clinic'});
     const [otp,setOtp] = useState(0);
     const [otpFlag,setOtpFlag] = useState(true);
     const [isGuest,setIsguest] = useState(false);
@@ -33,10 +35,8 @@ function Register(){
         setRadioSelected(e.target.value);
 
         isPatient===true?setIsAdhaar(true):setIsAdhaar(false);
-        setUserDetails({'fname':'','lname':'','email':'','mobile':'','adhaarNumber':'','age':'','password':'','retype_pass':'','isPatient':isPatient});
+        setUserDetails({'fname':'','lname':'','email':'','mobile':'','adhaarNumber':'','age':'','password':'','retype_pass':'','isPatient':isPatient,'clinicname':'','usertype':e.target.value});
 
-        isPatient==true?setIsAdhaar(true):setIsAdhaar(false);
-        setUserDetails({'fname':'','lname':'','email':'','mobile':'','adhaarNumber':'','age':'','password':'','retype_pass':'','isPatient':isPatient,'clinicname':''});
         if(e.target.value=='Guest'){
             setIsguest(true);
         }else{
@@ -51,16 +51,25 @@ function Register(){
 
     let handleRegister = evt => {
         console.log('User Detail -->',userDetails);
-        setOtpFlag(false);
-        let obj = {phone:userDetails.mobile};
-        axios.post(`http://localhost:9000/otpverify`,obj).then(res=>{
-            console.log('Res -->',res);
-            setInputOtp(res.data);
-        }).catch(err=>console.log(err));
+        if(userDetails.usertype=="Clinic"){
+            console.log('Clinic selected');
+            history.push('/clinicverification');
+        }else{
+            setOtpFlag(false);
+            let obj = {phone:userDetails.mobile};
+            axios.post(`http://localhost:9000/otpverify`,obj).then(res=>{
+                console.log('Res -->',res);
+                setInputOtp(res.data);
+            }).catch(err=>console.log(err));
+        }
     }
     let handleOtpSubmit = e =>{
         if(otp==inputOtp){
-            console.log("Register success");
+            console.log("Register success",userDetails);
+            let obj = {name:userDetails.clinicname,emailxyz:userDetails.email,phone:userDetails.mobile,passwd:userDetails.password};
+            axios.post('http://localhost:5000/registerclinic',obj).then(res =>{
+                console.log('Response from testConnection',res);
+            }).catch(err=>console.log(err));
         }else{
             console.log("Invalid OTP");
         }
@@ -91,7 +100,7 @@ function Register(){
                     </div>
                 </div>
                 <div className="row">
-                <div className="col-xs-6 col-sm-6 col-md-12">    
+                <div className="col-xs-6 col-sm-6 col-md-12" hidden={isGuest}>    
                 <label>Clinic Name</label>
                             <input type="text" className="form-control" placeholder="Enter Clinic Name" name="clinicname" value={userDetails.clinicname} onChange={handleChange}/>
                 </div>

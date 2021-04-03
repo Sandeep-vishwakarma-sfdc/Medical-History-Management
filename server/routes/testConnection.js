@@ -63,5 +63,20 @@ app.get('/insertPatient',async (req,res)=>{
         await res.send(result);
     });
  });
+
+
+ app.post('/registerclinic',async (req,res)=>{
+     console.log('Req body ',req.body);
+     let data = req.body;
+     let clinic = new ClinicModel({
+        name:data.name,
+        email:data.emailxyz,
+        mobile:data.phone,
+        passwd:data.passwd
+     });
+     clinic.save();
+     await res.send(clinic);
+ });
+
  app.listen(5000);
 

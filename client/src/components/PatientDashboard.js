@@ -1,56 +1,63 @@
-import {  Card,Badge,CardDeck } from 'react-bootstrap';
-import {} from './login';
+import {  Card } from 'react-bootstrap';
+import {FaMale,FaFemale} from 'react-icons/fa'
+import BarChart from './Barchart';
+import {useHistory} from 'react-router-dom';
+
 
 function PatientD({imagesrc,title,caption}){
+   let history = useHistory();
     console.log('image src',imagesrc);
+    let handlePerson = e =>{
+      console.log("Redirect");
+      history.push('/clinicdashboard');
+    };
 return (
   <div className="container mt-4">
-<CardDeck>
-<Card style={{ width: '35rem',left:-100 ,borderRadius:'50px',padding:'20px',borderColor:"skyblue", borderWidth:"10px" }}>
-
-  <Card.Body style={{borderRadius:'60px'}}>
-  <div className='row'><div className="col-xs-6 col-sm-6 col-md-3">
-    <Card.Title></Card.Title>
-    <Card.Text>
-    <Card.Img variant="top" style={{borderRadius:'30px'}} src="http://simpleicon.com/wp-content/uploads/user-5.png" width='100px' height='100px'/>
-  </Card.Text></div>
-    <div className="col-xs-6 col-sm-6 col-md-6"><h1>80</h1></div>
-    <div className="col-xs-6 col-sm-6 col-md-3">
-    <Badge pill variant="info">
-            Patient Info
-             </Badge>{' '}
-    </div>
-    </div>
- 
+<div className='row'>
+<div className="col-xs-6 col-sm-6 col-md-6 iconcmp" onClick={handlePerson}>
+<Card className="dashboard-card">
+  <Card.Body>
+  <div>
+   <Card.Img variant="top" className="ml-4" style={{borderRadius:'50px',border:"2px solid",height:'75px',width:'75px'}} src="http://simpleicon.com/wp-content/uploads/user-5.png" height=""/>
+   <span style={{fontSize:"52px",paddingLeft:"60px",fontWeight:"600px",color:'green'}}>80</span>
+   <span className="ml-5" style={{fontWeight:"400px",fontSize:"42px"}}>
+     Patient
+    </span> 
+   </div><div>
+     <span style={{paddingLeft:"160px",fontSize:"32px"}}>Patient in Clinic</span>
+   </div>
   </Card.Body>
 </Card>
-
-<Card style={{width: '35rem' ,borderRadius:'50px',padding:'20px',borderColor:"skyblue", borderWidth:"10px"}}>
-    <Card.Img variant="top" src="holder.js/100px160" />
+  </div>
+  <div className="col-xs-6 col-sm-6 col-md-2"></div>
+  <div className="col-xs-6 col-sm-6 col-md-2">
+  {/* backgroundImage:"URL('http://localhost:3000/images/malebackground.jpg')", */}
+  <Card className="dashboard-card" style={{height:"195px",backgroundSize:"cover"}}>
+  <Card.Body>
+  <div>
+    <FaMale style={{paddingLeft:"40px"}} size="75px"/>
+   <span style={{fontSize:"52px",paddingLeft:"35px",fontWeight:"600px",color:'#4AB5EB'}}>40</span>
+   </div>
+  </Card.Body>
+</Card>
+  </div>
+  <div className="col-xs-6 col-sm-6 col-md-2">
+  <Card className="dashboard-card" style={{height:"195px",backgroundSize:"cover"}}>
+  <Card.Body>
+  <div>
+  <FaFemale style={{paddingLeft:"40px"}} size="75px"/>
+   <span style={{fontSize:"52px",paddingLeft:"35px",fontWeight:"600px",color:'#FC7B7B'}}>40</span>
+   </div>
+  </Card.Body>
+</Card>
+  </div>
+</div>
+<Card className="mt-4">
     <Card.Body>
-      <Card.Title>Card title</Card.Title>
-      <Card.Text>
-     <h1>data of
-</h1>      </Card.Text>
-    </Card.Body>
-    <Card.Footer>
-      <small className="text-muted">Last updated 3 mins ago</small>
-    </Card.Footer>
-  </Card>
-  <Card style={{width: '35rem',right:-100 ,borderRadius:'50px',padding:'20px',borderColor:"skyblue", borderWidth:"10px"}}>
-    <Card.Body>
-      <Card.Title>Card title</Card.Title>
-      <Card.Text>
-        This is a wider card with supporting text below as a natural lead-in to
-        additional content. This card has even longer content than the first to
-        show that equal height action.
-      </Card.Text>
-      <Card.Text>
-        <small className="text-muted">Last updated 3 mins ago</small>
-      </Card.Text>
+      <BarChart/>
     </Card.Body>
   </Card>
-  </CardDeck>
+ 
  </div>
 );
 }
