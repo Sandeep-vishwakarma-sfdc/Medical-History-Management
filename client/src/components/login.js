@@ -12,7 +12,7 @@ function Login() {
 
     const [userDetails,setUserDetails] = useState({'isPatient':true,'adhaarNumber':'','email':'','password':'','usertype':'Patient','alise':''});
 
-    const [userDetails,setUserDetails] = useState({'isPatient':true,'adhaarNumber':'','email':'','password':'','usertype':'Patient'});
+    //const [userDetails,setUserDetails] = useState({'isPatient':true,'adhaarNumber':'','email':'','password':'','usertype':'Patient'});
 
     const [isGuest,setIsguest] = useState(false);
     const [isotp,setIsOtp] = useState(false);

@@ -1,4 +1,4 @@
-/* eslint-disable eqeqeq */
+
 import { Button,Modal} from 'react-bootstrap';
 import React, { useEffect, useState } from "react"; 
 import {Link} from 'react-router-dom';
@@ -66,17 +66,8 @@ function Register(){
     let handleOtpSubmit = e =>{
         if(otp==inputOtp){
             console.log("Register success",userDetails);
-<<<<<<< HEAD
-      let url="";
-            if(userDetails.usertype=='Guest'){
-                url='http://localhost:9000/registerGuest';
-            }
-            axios.post(url,userDetails).then(res =>{
-=======
-            let obj = {name:userDetails.clinicname,emailxyz:userDetails.email,phone:userDetails.mobile,passwd:userDetails.password};
-            axios.post('http://localhost:5000/registerclinic',obj).then(res =>{
->>>>>>> upstream/master
-                console.log('Response from testConnection',res);
+            axios.post('http://localhost:9000/registerGuest',userDetails).then(res =>{
+                console.log(res);
             }).catch(err=>console.log(err));
         }else{
             console.log("Invalid OTP");
@@ -207,7 +198,6 @@ function Register(){
                  className="otpcls"
                  value={otp}
                  onChange={handleChangeOtp}
-                 
                  numInputs={4}
                  separator={<span>O</span>}
              />
@@ -221,3 +211,4 @@ function Register(){
         </Modal>);
 }
 export default Register;
+

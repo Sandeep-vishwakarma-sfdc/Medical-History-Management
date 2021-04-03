@@ -15,8 +15,7 @@ let handleChange = e =>{
 
 let addPatient = e =>{
     console.log("userDetails ",userDetails);
-    
-}
+    }
 
 return ( <Modal show={showModel} onHide={()=>{
     setshowModel(false);

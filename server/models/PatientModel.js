@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const PatientSchema = new Schema({
     adhaarNo:{
         type:String, //adhaar number
-        required:true,
+        required:false
         // unique:true //uncomment this after testing
     },
     fname:{
