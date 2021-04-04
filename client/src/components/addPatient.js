@@ -26,7 +26,6 @@ let addPatient = e =>{
     //Add paint Api
     // Add ClinicPatient Mapping Api
 }
-
 return ( <Modal show={showModel} onHide={()=>{
     setshowModel(false);
     window.location.replace('/clinicdashboard');
