@@ -1,3 +1,4 @@
+
 import {  Card } from 'react-bootstrap';
 import {FaMale,FaFemale} from 'react-icons/fa'
 import BarChart from './Barchart';
@@ -66,6 +67,7 @@ return (
     </Card.Body>
   </Card>
  
+
  </div>
 );
 }

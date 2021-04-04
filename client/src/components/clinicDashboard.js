@@ -17,7 +17,7 @@ useEffect(()=>{
 
 let handleSearch = event => {
     setSearchstr(event.target.value);
-    if(searchstr!=''){
+    if(searchstr!==''){
         searchInList();
     }else{
         console.log('Refresh from Api');
@@ -33,7 +33,7 @@ function searchInList(){
     patientlst.forEach(patient=>{
         let name = patient.Name.toLowerCase();
         if(name.includes(searchstr.toLowerCase())){
-            let patient_element = templist1.find(ele=>ele._id == patient._id);
+            let patient_element = templist1.find(ele=>ele._id === patient._id);
             // console.log('patient element in temp ',patient_element);
             if(!patient_element){
                 templist1.push(patient);
