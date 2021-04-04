@@ -1,6 +1,6 @@
 
 import { Button,Modal} from 'react-bootstrap';
-import React, { useEffect, useState } from "react"; 
+import React, {  useEffect, useState } from "react"; 
 import {Link} from 'react-router-dom';
 import OtpInput from 'react-otp-input';
 import axios from 'axios';
@@ -15,6 +15,9 @@ function Register(){
     const [otpFlag,setOtpFlag] = useState(true);
     const [isGuest,setIsguest] = useState(false);
     const [inputOtp,setInputOtp] = useState(0);
+    const [validClinic,setvalidClinic] = useState({name:true,email:true,mobile:true,password:true,retypepass:true}); 
+    const [validPatient,setvalidPatient] = useState({fname:true,lname:true,mobile:true,adharr:true,email:true,password:true,retypepass:true});
+    const [validAdhaar,setvalidAdhaar] = useState(true); 
     
     useEffect(()=>{
         console.log('sometihing happen');
@@ -52,15 +55,21 @@ function Register(){
     let handleRegister = evt => {
         console.log('User Detail -->',userDetails);
         if(userDetails.usertype=="Clinic"){
-            console.log('Clinic selected');
-            history.push('/clinicverification');
+            if(validateClinic()){
+                console.log('Clinic selected');
+                history.push('/clinicverification');
+            }
         }else{
-            setOtpFlag(false);
-            let obj = {phone:userDetails.mobile};
-            axios.post(`http://localhost:9000/otpverify`,obj).then(res=>{
-                console.log('Res -->',res);
-                setInputOtp(res.data);
-            }).catch(err=>console.log(err));
+            if(ValidatePatient()){
+                setOtpFlag(false);
+                let obj = {phone:userDetails.mobile};
+                axios.post(`${process.env.REACT_APP_RELATIVE_URL}/otpverify`,obj).then(res=>{
+                    console.log('Res -->',res);
+                    setInputOtp(res.data);
+                }).catch(err=>console.log(err));
+            }else{
+                console.log('Invalid input');
+            }
         }
     }
     let handleOtpSubmit = e =>{
@@ -71,6 +80,68 @@ function Register(){
             }).catch(err=>console.log(err));
         }else{
             console.log("Invalid OTP");
+        }
+    }
+    function ValidatePatient(){
+        console.log(`${userDetails.fname==''} || ${userDetails.lname==''} || ${userDetails.email==''} || ${userDetails.mobile==''} || ${userDetails.adhaarNumber==''}`);
+        if(userDetails.fname=='' || userDetails.lname=='' || userDetails.email=='' || userDetails.mobile=='' || userDetails.adhaarNumber==''){
+            let tempfname = !userDetails.fname=='';
+            let templname = !userDetails.lname=='';
+            let tempemail =  !userDetails.email=='';
+            let tempmobile =  !userDetails.mobile=='';
+            let tempadhaar =  !userDetails.adhaarNumber=='';
+            console.log(`tempemail ${tempemail}`);
+            setvalidPatient({fname:tempfname,lname:templname,mobile:tempmobile,adharr:tempadhaar,email:tempemail,password:true,retypepass:true});
+            return false;
+         }else{
+             let testemail = validateEmail(userDetails.email);
+             let testahaar = validateAdhaar(userDetails.adhaarNumber);
+             console.log(`testemail && testahaar ${testemail} && ${testahaar}`)
+            if( testemail && testahaar){
+                setvalidPatient({fname:true,lname:true,mobile:true,adharr:true,email:true,password:true,retypepass:true});
+                return true;
+            }else{
+                setvalidPatient({fname:true,lname:true,mobile:true,adharr:testahaar,email:testemail,password:true,retypepass:true});
+                return false;
+            }
+         }
+    }
+    function validateClinic() {
+        if(userDetails.clinicname=='' || userDetails.email=='' || userDetails.mobile=='' || userDetails.password==''|| userDetails.retype_pass==''){
+            let tempemail =  !userDetails.email=='';
+            let tempname = !userDetails.clinicname=='';
+            let tempmobile = !userDetails.mobile =='';
+            let tempretype = !userDetails.retype_pass=='';
+            let temppass =  !userDetails.password=='';
+            console.log(`tempemail ${tempemail} temppass ${temppass}`);
+            setvalidClinic({name:tempname,email:tempemail,mobile:tempmobile,password:temppass,retypepass:tempretype});
+            return false;
+         }else{
+             if(validateEmail(userDetails.email)){
+                 setvalidClinic({name:true,email:true,mobile:true,password:true,retypepass:true});
+                 return true;
+                }else{
+                setvalidClinic({name:true,email:false,mobile:true,password:true,retypepass:true});
+                return false;
+             }
+         }
+    }
+    function validateEmail(email) {
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+    function validateAdhaar(adhaar){
+        if(adhaar){
+        if(adhaar.toString().length==12){
+            let result =  !Number.isNaN(Number(adhaar));
+            setvalidAdhaar(result);
+            return result;
+        }
+        setvalidAdhaar(false);
+        return false;
+        }else{
+            setvalidAdhaar(false);
+            return false;
         }
     }
 
@@ -89,12 +160,14 @@ function Register(){
                         <div className="form-group">
                             <label>First name</label><span className="required-input">*</span>
                             <input type="text" name="fname" className="form-control" placeholder="First name" value={userDetails.fname} onChange={handleChange}/>
+                            <span className="required-input" hidden={validPatient.fname}>Invalid input</span>
                         </div>
                     </div>    
                     <div className="col-xs-6 col-sm-6 col-md-6">
                         <div className="form-group">
                             <label>Last name</label><span className="required-input">*</span>
                             <input type="text" name="lname" className="form-control" placeholder="Last name" value={userDetails.lname} onChange={handleChange}/>
+                            <span className="required-input" hidden={validPatient.lname}>Invalid input</span>
                         </div>
                     </div>
                 </div>
@@ -102,19 +175,32 @@ function Register(){
                 <div className="col-xs-6 col-sm-6 col-md-12" hidden={isGuest}>    
                 <label>Clinic Name</label><span className="required-input">*</span>
                             <input type="text" className="form-control" placeholder="Enter Clinic Name" name="clinicname" value={userDetails.clinicname} onChange={handleChange}/>
+                            <span className="required-input" hidden={validClinic.name}>Invalid input</span>
                 </div>
                 </div>
                 <div className="row">
                 <div className="col-xs-6 col-sm-6 col-md-6">
-                    <div className="form-group">
+                    <div className="form-group" hidden={!isAdhaar}>
                         <label>Email</label><span className="required-input">*</span>
                         <input type="email" name="email" className="form-control" placeholder="Enter email" value={userDetails.email} onChange={handleChange} />
+                        <span className="required-input" hidden={validPatient.email}>Invalid input</span>
+                    </div>
+                    <div className="form-group" hidden={isGuest}>
+                        <label>Email</label><span className="required-input">*</span>
+                        <input type="email" name="email" className="form-control" placeholder="Enter email" value={userDetails.email} onChange={handleChange} />
+                        <span className="required-input" hidden={validClinic.email}>Invalid input</span>
                     </div>
                 </div>  
                 <div className="col-xs-6 col-sm-6 col-md-6">
-                    <div className="form-group">
+                    <div className="form-group" hidden={!isAdhaar}>
                         <label>Mobile</label><span className="required-input">*</span>
                         <input type="text" name="mobile" className="form-control" placeholder="Enter Contact" value={userDetails.mobile} onChange={handleChange}/>
+                        <span className="required-input" hidden={validPatient.mobile}>Invalid input</span>
+                    </div>
+                    <div className="form-group" hidden={isGuest}>
+                        <label>Mobile</label><span className="required-input">*</span>
+                        <input type="text" name="mobile" className="form-control" placeholder="Enter Contact" value={userDetails.mobile} onChange={handleChange}/>
+                        <span className="required-input" hidden={validClinic.mobile}>Invalid input</span>
                     </div>
                 </div>   
                 </div>
@@ -123,12 +209,14 @@ function Register(){
                     <div className="form-group">
                                 <label>Adhaar Number</label><span className="required-input">*</span>
                                 <input type="text" name="adhaarNumber" className="form-control" placeholder="Enter Adhaar Number" value={userDetails.adhaarNumber} onChange={handleChange}/>
+                                <span className="required-input" hidden={validAdhaar}>Invalid input</span>
                     </div>
                 </div>
                 <div className="col-xs-6 col-sm-6 col-md-6">
                     <div className="form-group">
                                 <label>Age</label><span className="required-input">*</span>
                                 <input type="Number" name="age" className="form-control" placeholder="Enter Age" value={userDetails.age} onChange={handleChange} />
+                                <span className="required-input" hidden>Invalid input</span>
                     </div>
                 </div>
                 </div>
@@ -137,12 +225,14 @@ function Register(){
                         <div className="form-group">
                             <label>Password</label><span className="required-input">*</span>
                             <input type="password" name="password" className="form-control" placeholder="Enter password" value={userDetails.password} onChange={handleChange} />
+                            <span className="required-input" hidden={validClinic.password}>Invalid input</span>
                         </div>
                     </div>
                     <div className="col-xs-6 col-sm-6 col-md-6">
                         <div className="form-group">
                             <label>Retype Password</label><span className="required-input">*</span>
                             <input type="password" name="retype_pass" className="form-control" placeholder="Retype password" value={userDetails.retype_pass} onChange={handleChange}/>
+                            <span className="required-input" hidden={validClinic.retypepass}>Invalid input</span>
                         </div>
                     </div>
                 </div>

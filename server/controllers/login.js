@@ -16,7 +16,7 @@ exports.loginGuest=async (req,res)=>{
             }
             const phone=result.contact.patientMobile;
             var options = { authorization: process.env.API_KEY, message: OTP, numbers: [phone] };
-            //const response= fast2sms.sendMessage(options);
+            // const response= fast2sms.sendMessage(options);
             let obj={
                 result:result,
                 otp:OTP
