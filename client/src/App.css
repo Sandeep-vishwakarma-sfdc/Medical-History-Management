@@ -98,6 +98,7 @@ body, html, .App, #root, .outer {
 .register_link{
   padding-right: 111px;
 }
+/*
 .hideAdhaar{
   /*
   visibility: hidden;
@@ -107,8 +108,8 @@ body, html, .App, #root, .outer {
 
   /* unhide 
   visibility: visible;
-  opacity: 1;*/
-}
+  opacity: 1;}*/
+
 
 .otpcls{
   width: 100%;
@@ -151,3 +152,4 @@ body, html, .App, #root, .outer {
 .required-input{
   color: red;
 }
+

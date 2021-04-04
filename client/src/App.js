@@ -20,6 +20,7 @@ import AdminLogin from "./components/adminLogin";
 
 
 
+
 function App() {
   return (<div>
     <Router>
@@ -57,7 +58,6 @@ function App() {
       <Route exact strict path="/dashboard">
       <PatientD/>
      </Route>
-
       <Route exact strict path="/dashboard">
       <Header />
       <PatientD/>

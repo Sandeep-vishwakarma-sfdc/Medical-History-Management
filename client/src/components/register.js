@@ -41,6 +41,7 @@ function Register(){
         setUserDetails({'fname':'','lname':'','email':'','mobile':'','adhaarNumber':'','age':'','password':'','retype_pass':'','isPatient':isPatient,'clinicname':'','usertype':e.target.value});
 
         if(e.target.value=='Guest'){
+
             setIsguest(true);
         }else{
             setIsguest(false);
