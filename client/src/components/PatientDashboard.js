@@ -2,10 +2,18 @@ import {  Card } from 'react-bootstrap';
 import {FaMale,FaFemale} from 'react-icons/fa'
 import BarChart from './Barchart';
 import {useHistory} from 'react-router-dom';
-
+import { useEffect, useState } from 'react';
 
 function PatientD({imagesrc,title,caption}){
    let history = useHistory();
+  const [hasRendered,setHasRender] = useState(false);
+   useEffect(()=>{
+     if(!hasRendered){
+      console.log("session "+sessionStorage.getItem("loggedInUser"));
+      setHasRender(true);
+     }
+   },[]);
+
     console.log('image src',imagesrc);
     let handlePerson = e =>{
       console.log("Redirect");

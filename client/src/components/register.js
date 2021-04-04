@@ -87,33 +87,33 @@ function Register(){
                 <div className="row" hidden={!isAdhaar}>
                     <div className="col-xs-6 col-sm-6 col-md-6">
                         <div className="form-group">
-                            <label>First name</label>
+                            <label>First name</label><span className="required-input">*</span>
                             <input type="text" name="fname" className="form-control" placeholder="First name" value={userDetails.fname} onChange={handleChange}/>
                         </div>
                     </div>    
                     <div className="col-xs-6 col-sm-6 col-md-6">
                         <div className="form-group">
-                            <label>Last name</label>
+                            <label>Last name</label><span className="required-input">*</span>
                             <input type="text" name="lname" className="form-control" placeholder="Last name" value={userDetails.lname} onChange={handleChange}/>
                         </div>
                     </div>
                 </div>
                 <div className="row">
                 <div className="col-xs-6 col-sm-6 col-md-12" hidden={isGuest}>    
-                <label>Clinic Name</label>
+                <label>Clinic Name</label><span className="required-input">*</span>
                             <input type="text" className="form-control" placeholder="Enter Clinic Name" name="clinicname" value={userDetails.clinicname} onChange={handleChange}/>
                 </div>
                 </div>
                 <div className="row">
                 <div className="col-xs-6 col-sm-6 col-md-6">
                     <div className="form-group">
-                        <label>Email</label>
+                        <label>Email</label><span className="required-input">*</span>
                         <input type="email" name="email" className="form-control" placeholder="Enter email" value={userDetails.email} onChange={handleChange} />
                     </div>
                 </div>  
                 <div className="col-xs-6 col-sm-6 col-md-6">
                     <div className="form-group">
-                        <label>Mobile</label>
+                        <label>Mobile</label><span className="required-input">*</span>
                         <input type="text" name="mobile" className="form-control" placeholder="Enter Contact" value={userDetails.mobile} onChange={handleChange}/>
                     </div>
                 </div>   
@@ -121,13 +121,13 @@ function Register(){
                 <div className="row" hidden={!isAdhaar}>
                 <div className="col-xs-6 col-sm-6 col-md-6">
                     <div className="form-group">
-                                <label>Adhaar Number</label>
+                                <label>Adhaar Number</label><span className="required-input">*</span>
                                 <input type="text" name="adhaarNumber" className="form-control" placeholder="Enter Adhaar Number" value={userDetails.adhaarNumber} onChange={handleChange}/>
                     </div>
                 </div>
                 <div className="col-xs-6 col-sm-6 col-md-6">
                     <div className="form-group">
-                                <label>Age</label>
+                                <label>Age</label><span className="required-input">*</span>
                                 <input type="Number" name="age" className="form-control" placeholder="Enter Age" value={userDetails.age} onChange={handleChange} />
                     </div>
                 </div>
@@ -135,13 +135,13 @@ function Register(){
                 <div className="row" hidden={isGuest}>
                     <div className="col-xs-6 col-sm-6 col-md-6">
                         <div className="form-group">
-                            <label>Password</label>
+                            <label>Password</label><span className="required-input">*</span>
                             <input type="password" name="password" className="form-control" placeholder="Enter password" value={userDetails.password} onChange={handleChange} />
                         </div>
                     </div>
                     <div className="col-xs-6 col-sm-6 col-md-6">
                         <div className="form-group">
-                            <label>Retype Password</label>
+                            <label>Retype Password</label><span className="required-input">*</span>
                             <input type="password" name="retype_pass" className="form-control" placeholder="Retype password" value={userDetails.retype_pass} onChange={handleChange}/>
                         </div>
                     </div>

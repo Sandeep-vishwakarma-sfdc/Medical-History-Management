@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from "react"; 
+import React, {  useState } from "react"; 
 import { Button,Modal} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
+import { useToasts } from 'react-toast-notifications';
+
 function AddPatient(){
+const { addToast } = useToasts();
 const [showModel,setshowModel ]=useState(true);
 const [userDetails,setUserDetails] = useState({'fname':'','lname':'','email':'','mobile':'','adhaarNumber':'','age':'','password':'','retype_pass':'','isPatient':true,'clinicname':'','usertype':'Patient'});
 
@@ -15,8 +18,14 @@ let handleChange = e =>{
 
 let addPatient = e =>{
     console.log("userDetails ",userDetails);
-    }
-
+    setshowModel(false);
+    addToast('Patient Added Successfully', { appearance: 'success', autoDismiss: true});
+    setTimeout(() => {
+        window.location.replace('/clinicdashboard');
+    }, 2000);
+    //Add paint Api
+    // Add ClinicPatient Mapping Api
+}
 return ( <Modal show={showModel} onHide={()=>{
     setshowModel(false);
     window.location.replace('/clinicdashboard');
@@ -70,7 +79,20 @@ return ( <Modal show={showModel} onHide={()=>{
         </div>
     </div>
     </div>
-   
+    <div className="row">
+        <div className="col-xs-6 col-sm-6 col-md-6">
+            <div className="form-group">
+                <label>Password</label>
+                <input type="password" name="password" className="form-control" placeholder="Enter password" value={userDetails.password} onChange={handleChange} />
+            </div>
+        </div>
+        <div className="col-xs-6 col-sm-6 col-md-6">
+            <div className="form-group">
+                <label>Retype Password</label>
+                <input type="password" name="retype_pass" className="form-control" placeholder="Retype password" value={userDetails.retype_pass} onChange={handleChange}/>
+            </div>
+        </div>
+    </div>
    </form> 
 </Modal.Body>
 <Modal.Footer>

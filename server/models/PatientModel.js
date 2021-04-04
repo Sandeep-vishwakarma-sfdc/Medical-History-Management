@@ -73,9 +73,9 @@ const PatientSchema = new Schema({
         type:String, // guest,patient
         required:true
     },
-    alise:{
-        type:String,
-        unique:false
+    verified:{
+        type:Boolean,
+        default:false
     }
 });
 const PatientModel = mongoose.model('Patient',PatientSchema);

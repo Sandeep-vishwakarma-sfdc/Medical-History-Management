@@ -2,10 +2,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useEffect, useState } from "react";
 import { Button, Modal } from 'react-bootstrap';
 import OtpInput from 'react-otp-input';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Axios from 'axios';
+import { useToasts } from 'react-toast-notifications';
 
 function Login() {
+    let history = useHistory();
+    const { addToast } = useToasts();
     const [showModel, setshowModel] = useState(true);
     const [isAdhaar, setIsAdhaar] = useState(true);
     const [radioSelected, setRadioSelected] = useState('Patient');
@@ -17,6 +20,8 @@ function Login() {
     const [isGuest,setIsguest] = useState(false);
     const [isotp,setIsOtp] = useState(false);
     const [otp,setOtp] = useState(0);
+    const [validPatient,setvalidPatient] = useState({email:true,password:true});
+    const [validClinic,setvalidClinic] = useState({email:true,password:true}); 
     // console.log('login')
     let handleChange = e =>{
         // console.log('event on field',e.target.name)
@@ -43,18 +48,67 @@ function Login() {
         if(isGuest){
             setIsOtp(true);
         }
-        let obj = {email:userDetails.email,passwd:userDetails.password};
-        Axios.post(`http://localhost:5000/cliniclogin`,obj).then(res=>{
-            console.log('Login Response ',res);
-        }).catch(err=>console.log('login '+err));
-    }
+        let condition = userDetails.usertype=="Clinic"? validateClinic():validatePatient();
+        if(condition){
+            console.log('valid input');
+            let obj = {email:userDetails.email,passwd:userDetails.password};
+            Axios.post(`http://localhost:5000/cliniclogin`,obj).then(res=>{
+                console.log('Login Response ',res.data);
+                sessionStorage.setItem("loggedInUser",JSON.stringify(res.data));
+                history.push('/dashboard');
+            }).catch(err=>console.log('login '+err));
+            console.log("End");
+        }else{
+            console.log("Invalid input");
+        }
+}
     let handleChangeOtp = otp =>{
         console.log('OTP ',otp);
         setOtp(otp);
     }
-    useEffect(()=>{
-       
-    });
+
+    function validatePatient(){
+        console.log('isvalid ',(userDetails.email=='') || (userDetails.password==''));
+         if((userDetails.email=='') || (userDetails.password=='')){
+            let tempemail =  !userDetails.email=='';
+            let temppass =  !userDetails.password=='';
+            console.log(`tempemail ${tempemail} temppass ${temppass}`);
+            setvalidPatient({email:tempemail,password:temppass});
+            return false;
+         }else{
+             if(validateEmail(userDetails.email)){
+                 setvalidPatient({email:true,password:true});
+                 return true;
+                }else{
+                setvalidPatient({email:false,password:true});
+                return false;
+             }
+         }
+    }
+
+    function validateClinic(){
+        if((userDetails.email=='') || (userDetails.password=='')){
+            let tempemail =  !userDetails.email=='';
+            let temppass =  !userDetails.password=='';
+            console.log(`tempemail ${tempemail} temppass ${temppass}`);
+            setvalidClinic({email:tempemail,password:temppass});
+            return false;
+         }else{
+             if(validateEmail(userDetails.email)){
+                 setvalidClinic({email:true,password:true});
+                 return true;
+                }else{
+                setvalidClinic({email:false,password:true});
+                return false;
+             }
+         }
+    }
+
+    function validateEmail(email) {
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+    
     return !isotp?(
         <div>
             <Modal show={showModel} onHide={() => {
@@ -70,19 +124,17 @@ function Login() {
                         <div className="form-group" hidden={isAdhaar}>
                             <label>Email</label><span className="required-input">*</span>
                             <input type="email" className="form-control" placeholder="Enter email" name="email" value={userDetails.email} onChange={handleChange}/>
+                            <span className="required-input" hidden={validClinic.email}>Invalid</span>
                         </div>
                         <div className="form-group" hidden={!isAdhaar}>
-
-                            <label>Username</label>
-                            <input type="text" className="form-control" placeholder="Enter username" name="alise" value={userDetails.alise} onChange={handleChange}/>
-
-                            <label>Email</label>
-                            <input type="text" className="form-control" placeholder="Enter email" name="email" value={userDetails.email} onChange={handleChange}/>
-
+                            <label>Email</label><span className="required-input">*</span>
+                            <input type="email" className="form-control" placeholder="Enter email" name="email" value={userDetails.email} onChange={handleChange}/>
+                            <span className="required-input" hidden={validPatient.email}>Invalid</span>
                         </div>
                         <div className="form-group">
-                            <label>Password</label>
+                            <label>Password</label><span className="required-input">*</span>
                             <input type="password" className="form-control" placeholder="Enter password" name="password" value={userDetails.password} onChange={handleChange} />
+                            <span className="required-input" hidden={validPatient.password || validClinic.email}>Complete this field</span>
                         </div>
                         <div className="form-group">
                             <div className="custom-control custom-checkbox">
@@ -97,8 +149,9 @@ function Login() {
                     </form>
                     <form hidden={!isGuest}>
                         <div className="form-group">
-                                <label>Adhaar Number</label>
+                                <label>Adhaar Number</label><span className="required-input">*</span>
                                 <input type="text" className="form-control" placeholder="Enter Adhaar Number" name="adhaar_number" value={userDetails.email} onChange={handleChange}/>
+                                <span className="required-input" >Complete this field</span>
                         </div>
                     </form>
                     <div>
@@ -135,11 +188,7 @@ function Login() {
                     <Link to="/register" className="register_link"> click here to register</Link>
                     <Link to="/" className="btn btn-secondary" onClick={() => setshowModel(false)}>Close</Link>
 
-                    <Link className="btn btn-primary" to='/dashboard' onClick={()=>{
-                        console.log('UserDetails ',userDetails);
-                    }}>Login</Link>
-                    
-
+                    <Button  className="btn btn-primary" onClick={handleLogin}>Login</Button>
                 </Modal.Footer>
             </Modal>
         </div>

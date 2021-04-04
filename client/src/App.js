@@ -14,7 +14,9 @@ import PersonDetails from './components/personDetails';
 import ClinicVerification from './components/clinicverification';
 import AddPatient from './components/addPatient';
 import DeletePrompt from './components/promptdelete';
-
+import { ToastProvider } from 'react-toast-notifications';
+import AdmiClinicVerification  from './components/adminclinicVirification';
+import AdminLogin from "./components/adminLogin";
 
 
 
@@ -22,27 +24,32 @@ import DeletePrompt from './components/promptdelete';
 function App() {
   return (<div>
     <Router>
-
-      <Header/>
+    <ToastProvider placement="top-center">
       <Switch>
       <Route exact strict path="/">
+      <Header />
         <Home/>
       </Route>
       <Route exact strict path="/home">
+      <Header />
         <Home/>
       </Route>
       <Route exact strict path="/register">
+      <Header />
         <Register/>
         <Home/>
       </Route>
       <Route exact strict path="/login">
+      <Header />
         <Login/>
         <Home/>
       </Route>
       <Route exact strict path="/contact">
+      <Header />
         <Address/>
       </Route>
       <Route exact strict path="/clinicd">
+      <Header />
        <ClinicD></ClinicD>
       </Route>
  <Route exact strict path="/patientd">
@@ -53,29 +60,43 @@ function App() {
      </Route>
 
       <Route exact strict path="/dashboard">
+      <Header />
       <PatientD/>
       </Route>
 
       <Route exact strict path="/clinicdashboard">
+      <Header />
         <ClinicDashboard/>
       </Route>
       <Route exact strict path="/clinicverification">
+      <Header />
         <ClinicVerification/>
       </Route>
-
-      <Route exact strict path="/promptdelete">
+      <Route exact strict path="/promptdelete/:personid">
+      <Header />
         <DeletePrompt/>
         <ClinicDashboard/>
       </Route>
       <Route exact strict path="/addpatient">
+      <Header />
         <AddPatient/>
         <ClinicDashboard/>
       </Route>
-
+      <Route exact strict path="/adminclinicVerification">
+      <Header />
+          <AdmiClinicVerification/>
+      </Route>
+      <Route exact strict path="/adminlogin">
+      <Header />
+        <AdminLogin/>
+        <Home/>
+      </Route>
       <Route exact strict path="/persondetail/:personid">
+      <Header />
         <PersonDetails/>
       </Route>
       </Switch>
+    </ToastProvider>
     </Router>
   </div>
  

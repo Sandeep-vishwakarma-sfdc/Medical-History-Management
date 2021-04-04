@@ -58,7 +58,7 @@ return (<div className="ml-3 ">
             <div className="col-xs-6 col-sm-3 col-md-3"></div>
             <div className="col-xs-6 col-sm-5 col-md-4"></div>
             <div className="col-xs-6 col-sm-1 col-md-2">
-                <Button variant="primary" onClick={handleAddPatient}>Add Person</Button>
+                <Button variant="success" onClick={handleAddPatient}>Add Person</Button>
             </div>
         </div>
             <div className="listUser">

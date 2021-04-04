@@ -1,12 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function PersonDetails(){
-
+const [userDetails,setUserDetails] = useState({}); 
 useEffect(()=>{
-    console.log('location ',window.location);
-})    
 
-return(<h1>Hello</h1>);
+})
+
+return(<h1></h1>);
 }
 
 export default PersonDetails;

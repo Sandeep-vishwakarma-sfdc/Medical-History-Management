@@ -14,7 +14,7 @@ let handleView = () =>{
 }   
 let handlePrompt = () =>{
     console.log('Delete prompt');
-    history.push(`/promptdelete`);
+    history.push(`/promptdelete/${id}`);
 }
 
 return(
